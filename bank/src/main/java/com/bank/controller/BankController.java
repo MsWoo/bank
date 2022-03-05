@@ -1,15 +1,44 @@
 package com.bank.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.bank.entity.BankUser;
+import com.bank.entity.UserRole;
+import com.bank.service.UserService;
 
-@RestController
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
 public class BankController {
+
+	private final UserService service;
 
 	@RequestMapping("/")
 	public String home() {
-		return "{'id':'ms',\n"
-				+ "'age':'27'}";
+		return "home";
 	}
-	
+
+	@RequestMapping("/login")
+	public String loginForm() {
+		return "login";
+	}
+
+	@GetMapping("/signup")
+	public String signUpForm() {
+		return "signup";
+	}
+
+	@PostMapping("/signup")
+	public String signUp(BankUser user) {
+		System.out.println(user);
+		user.addUserRole(UserRole.ROLE_USER);
+		// user.addUserRole(UserRole.ROLE_ADMIN);
+		user.setFromSocial("");
+		service.joinUser(user);
+		return "redirect:/login";
+	}
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>home</title>
+</head> 
+
+
+<body>
+
+<div class = "main">
+	<h1>200OK</h1>
+  
+  <div sec:authorize="isAuthenticated()">
+  
+	<form th:action="@{/logout}" method="post">
+			Welcome <span th:text="${name}"></span>
+			<button type="submit" id ="logout" onclick="location.href='/logout'">Logout</button>
+	</form>
+
+  </div>
+  
+  <!-- 로그인 되지 않았을때 -->
+  <div sec:authorize="!isAuthenticated()">
+	  <button onclick="location.href='/login'">Login</button>
+	  <button onclick="location.href='/signup'">Sign up</button>
+  </div>
+
+
+</div>
+</body>
+</html>
