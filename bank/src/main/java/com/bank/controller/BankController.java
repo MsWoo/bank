@@ -22,7 +22,7 @@ public class BankController {
 		return "home";
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping("/loginPage")
 	public String loginForm() {
 		return "login";
 	}
@@ -34,11 +34,16 @@ public class BankController {
 
 	@PostMapping("/signup")
 	public String signUp(BankUser user) {
-		System.out.println(user);
 		user.addUserRole(UserRole.ROLE_USER);
 		// user.addUserRole(UserRole.ROLE_ADMIN);
 		user.setFromSocial("");
 		service.joinUser(user);
 		return "redirect:/login";
 	}
+
+	@RequestMapping("/user")
+	public String test() {
+		return "user";
+	}
+
 }
