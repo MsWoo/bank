@@ -1,5 +1,10 @@
 package com.bank.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.bank.entity.BankUser;
 import com.bank.service.UserService;
 
@@ -7,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -129,5 +135,19 @@ public class BankController {
 			}
 		}
 		return "redirect:/transfer";
+	}
+
+	@RequestMapping("/list")
+	private String userList(Model model, HttpServletRequest request) {
+		List<BankUser> userList = new ArrayList<>();
+		userList = service.findAll();
+		model.addAttribute("userlist", userList);
+		return "list";
+	}
+
+	@RequestMapping("/delete/{id}")
+	public String deleteUser(@PathVariable(name = "id") Long id) {
+		service.delete(id);
+		return "redirect:/list";
 	}
 }

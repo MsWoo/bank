@@ -26,6 +26,10 @@
 
 		<div sec:authorize="isAuthenticated()">
 			<button onclick="location.href='/mypage'">MyPage</button>
+			<div sec:authorize="hasRole('ADMIN')">
+				<button onclick="location.href='/list'">List</button>
+			</div>
+			
 		</div>
 
 
