@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>deposit</title>
+</head>
+
+<body>
+	<div class="main">
+		<h1>Deposit</h1>
+
+		<div sec:authorize="isAuthenticated()">
+			Welcome <span th:text="${name}"></span>
+			Current Balnace : <span th:text="${balance}"></span>
+			<form method="post" action="transfer">
+				<input type="text" id="target" name="target">
+				<input type="text" id="balance" name="balance">
+				<input type="submit" class="btn" value="Transfer">
+			</form>
+			
+			<button onclick="location.href='/mypage'">Back</button>
+		</div>
+
+	</div>
+</body>
+
+</html>

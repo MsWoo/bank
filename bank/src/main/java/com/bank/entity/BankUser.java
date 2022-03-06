@@ -40,6 +40,8 @@ public class BankUser implements UserDetails {
 
     private String fromSocial;
 
+    private Long balance;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>MyPage</title>
+	<meta charset="UTF-8">
+</head>
+
+
+<body>
+	<div class="main">
+		<h1>MyPage</h1>
+	</div>
+
+	<div class="container">
+		<b>Email :</b>
+		<p th:text="${email}"></p>
+		<b>Name :</b>
+		<p th:text="${name}"></p>
+		<b>Balance :</b>
+		<p th:text="${balance}"></p>
+		<b>Role :</b>
+		<div sec:authorize="hasRole('USER')">USER</div>
+		<div sec:authorize="hasRole('ADMIN')">ADMIN</div>
+		<form th:action="@{/logout}" method="post">
+			<button type="submit" id="logout" onclick="location.href='/logout'">Logout</button>
+		</form>
+	</div>
+	<div class="button-container">
+		<button onclick="location.href='/'">Home</button>
+		<button onclick="location.href='/deposit'">Deposit</button>
+		<button onclick="location.href='/withdraw'">Withdraw</button>
+		<button onclick="location.href='/transfer'">Transfer</button>
+	</div>
+</body>
+
+</html>
